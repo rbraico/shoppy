@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shoppy 🛒</title>
+    <style>
+        body { font-family: sans-serif; padding: 1em; background: #f9f9f9; }
+        h1 { font-size: 1.5em; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 0.5em 0; border-bottom: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>🛒 Lista della Spesa</h1>
+    <ul>
+        {% for item in items %}
+        <li>{{ item[0] }} — <strong>{{ item[1] }}</strong></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
