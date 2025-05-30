@@ -1,8 +1,3 @@
-# This file isdefine de StockHouse db.
-class Config:
-   DATABASE_PATH = "C:/Users/Gebruiker/Projects/StockHouse/sqlite_db/stockhouse.db"
-
-
 import os
 import secrets
 

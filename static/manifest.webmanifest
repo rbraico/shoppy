@@ -1,0 +1,15 @@
+{
+  "name": "StockHouse",
+  "short_name": "StockHouse",
+  "start_url": "/shopping_list",
+  "display": "standalone",
+  "background_color": "#add8e6",
+  "theme_color": "#add8e6",
+  "icons": [
+    {
+      "src": "/static/icons/stockhouse_logo.PNG",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
