@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-slim-bookworm
 
 # Imposta la directory di lavoro nel container
 WORKDIR /shoppy
@@ -7,8 +7,12 @@ WORKDIR /shoppy
 COPY . .
 
 # Installa le dipendenze
-RUN apt-get update && apt-get upgrade -y && \
-    pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y gcc build-essential && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apt-get purge -y --auto-remove gcc build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
 # Variabili d’ambiente
 ENV DB_PATH=/config/stockhouse/stockhouse.db

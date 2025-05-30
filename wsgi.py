@@ -1,3 +1,3 @@
-from shoppy import create_app
+from shoppy.app_code import create_app
 
 app = create_app()
