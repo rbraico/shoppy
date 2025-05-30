@@ -1,0 +1,15 @@
+# Ignora config.yaml (usato solo localmente)
+config.yaml
+
+# Ignora file temporanei di sistema/editor
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.db
+.env
+.vscode/
+.idea/
+
+# Ignora altri file di configurazione locali
+*.local
