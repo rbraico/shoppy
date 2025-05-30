@@ -1,6 +1,6 @@
 name: Shoppy
 description: "Visualizzatore mobile della lista della spesa di StockHouse"
-version: "1.0.1"
+version: "1.0.2"
 slug: "shoppy"
 url: "https://github.com/rbraico/shoppy"
 init: false
