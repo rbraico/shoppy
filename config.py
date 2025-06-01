@@ -19,7 +19,8 @@ class Config:
             return db_path
 
         elif os.name == "nt":  # Windows
-            path = os.path.join(os.getcwd(), "sqlite_db", "stockhouse.db")
+            #path = os.path.join(os.getcwd(), "sqlite_db", "stockhouse.db")
+            path = r"C:\Users\Gebruiker\Projects\StockHouse\sqlite_db\stockhouse.db"
             print(f"[Config] Using Windows dev path: {path}")
             return path
 

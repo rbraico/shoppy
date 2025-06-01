@@ -1,15 +1,20 @@
 {
-  "name": "StockHouse",
-  "short_name": "StockHouse",
+  "name": "Shopping List",
+  "short_name": "Shoppy",
   "start_url": "/shopping_list",
   "display": "standalone",
   "background_color": "#add8e6",
   "theme_color": "#add8e6",
   "icons": [
     {
-      "src": "/static/icons/stockhouse_logo.PNG",
+      "src": "/static/icons/Shoppy_logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/icons/Shoppy_logo-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
-  ]
+ ]
 }

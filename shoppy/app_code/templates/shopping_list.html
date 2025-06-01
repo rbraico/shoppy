@@ -3,29 +3,134 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shoppy 🛒</title>
-
-    <!-- Link al manifest -->
     <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
-
-    <!-- Icona favicon -->
-    <link rel="icon" href="{{ url_for('static', filename='images/stockhouse_logo.PNG') }}">
-
-    <!-- Colore tema per mobile -->
+    <link rel="icon" href="{{ url_for('static', filename='images/Shoppy_icon_512.png') }}">
     <meta name="theme-color" content="#ffffff">
-
     <style>
         body { font-family: sans-serif; padding: 1em; background: #f9f9f9; }
-        h1 { font-size: 1.5em; }
-        ul { list-style: none; padding: 0; }
-        li { padding: 0.5em 0; border-bottom: 1px solid #ccc; }
+        h1 { font-size: 1.2em; text-align: center; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px auto;
+            font-size: 0.98em;
+            background: #fff;
+        }
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+        }
+        th {
+            background-color: #1976d2;
+            color: #fff;
+            font-size: 1em;
+            border: 1px solid #fff;
+        }
+        td {
+            border: 1px solid #ddd;
+            font-size: 0.97em;
+            word-break: break-word;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        input[type="date"] {
+            padding: 2px 4px;
+            font-size: 0.97em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="number"] {
+            padding: 2px 4px;
+            font-size: 0.97em;
+            max-width: 70px;
+            width: 70px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+                border-bottom: 2px solid #1976d2;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                min-height: 32px;
+            }
+            td:before {
+                position: absolute;
+                left: 8px;
+                top: 6px;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #1976d2;
+            }
+            td:nth-of-type(1):before { content: "Prodotto"; }
+            td:nth-of-type(2):before { content: "Quantità"; }
+            td:nth-of-type(3):before { content: "Prezzo"; }
+            td:nth-of-type(4):before { content: "Data Scadenza"; }
+        }
     </style>
 </head>
 <body>
     <h1>🛒 Lista della Spesa</h1>
-    <ul>
+    <!-- Filtro shop -->
+    <div style="text-align:center; margin-bottom:10px;">
+        <label for="shopFilter">Filtra per negozio:</label>
+        <select id="shopFilter" style="padding:4px;">
+            <option value="">Tutti</option>
+            {% set shop_set = [] %}
+            {% for item in items %}
+                {% if item[3] not in shop_set %}
+                    <option value="{{ item[3] }}">{{ item[3] }}</option>
+                    {% set _ = shop_set.append(item[3]) %}
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <table id="shoppingTable">
+        <tr>
+            <th>Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo</th>
+            <th>Data Scadenza</th>
+        </tr>
         {% for item in items %}
-        <li>{{ item[0] }} — <strong>{{ item[1] }}</strong></li>
+        <tr data-shop="{{ item[3] }}">
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>
+                <input type="number" name="prezzo_{{ loop.index }}" value="{{ item[2] }}" step="0.01" min="0" max="999.99" style="max-width:70px; text-align:right;" inputmode="decimal" pattern="^\d{1,3}(\.\d{0,2})?$" />
+            </td>
+            <td>
+                <input type="date" name="scadenza_{{ loop.index }}" />
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
+    <script>
+        const shopFilter = document.getElementById('shopFilter');
+        shopFilter.addEventListener('change', function() {
+            const value = this.value;
+            const rows = document.querySelectorAll('#shoppingTable tr[data-shop]');
+            rows.forEach(row => {
+                if (!value || row.getAttribute('data-shop') === value) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
