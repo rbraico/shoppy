@@ -1,2 +1,2 @@
 #!/bin/bash
-gunicorn -w 2 -b 127.0.0.1:9193 wsgi:app
+gunicorn -w 2 -b 0.0.0.0:9193 wsgi:app

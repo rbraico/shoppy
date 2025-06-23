@@ -15,7 +15,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Variabili d’ambiente
-ENV DB_PATH=/config/stockhouse/stockhouse.db
+ENV DB_PATH=/config/sqlite_db/stockhouse.db
 
 # Espone la porta (diversa da StockHouse)
 EXPOSE 9193
