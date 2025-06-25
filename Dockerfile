@@ -23,7 +23,7 @@ EXPOSE 9193
 # Avvia con gunicorn
 #CMD ["gunicorn", "-b", "0.0.0.0:9193", "wsgi:app"]
 
-# Copia lo script e rendilo eseguibile
+# Copia lo script e rendilo eseguibile.
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
