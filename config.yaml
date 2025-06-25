@@ -1,0 +1,25 @@
+# Questo file configuration.yaml serve per Home Assistant
+name: Shoppy
+description: "Visualizzatore mobile della lista della spesa di StockHouse"
+version: "2.0.4"
+slug: shoppy
+url: "https://github.com/rbraico/shoppy"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: services
+ports:
+  "9193/tcp": 9193
+environment:
+  DB_PATH: "/config/sqlite_db/stockhouse.db"
+map:
+  - config:rw
+options:
+  theme: "light"
+schema:
+  theme: "str"
+
