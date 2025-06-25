@@ -27,4 +27,17 @@ class Config:
 
     @staticmethod
     def get_stockhouse_url():
-        return os.getenv("STOCKHOUSE_URL", "http://127.0.0.1:5000")
+        # Se è impostata la variabile d'ambiente, usala sempre (priorità massima)
+        env_url = os.getenv("STOCKHOUSE_URL")
+        logger.debug(f"os.name = {os.name}")
+        logger.debug(f"STOCKHOUSE_URL env = {env_url}")
+        if env_url:
+            logger.debug(f"Uso STOCKHOUSE_URL da env: {env_url}")
+            return env_url
+        # Se siamo su Windows (sviluppo), usa localhost
+        if os.name == "nt":
+            logger.debug("Ambiente Windows rilevato, uso http://127.0.0.1:5000")
+            return "http://127.0.0.1:5000"
+        # Altrimenti (Home Assistant/Linux), usa l'hostname dell'add-on StockHouse
+        logger.debug("Ambiente POSIX rilevato, uso http://stockhouse:9194")
+        return "http://stockhouse:9194"
