@@ -1,8 +1,12 @@
 import os
 import secrets
+import logging
 from dotenv import load_dotenv
 
-# Carica il file .env (automaticamente dalla root del progetto)
+# Configura il logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 load_dotenv()
 
 class Config:
@@ -11,8 +15,8 @@ class Config:
     @staticmethod
     def get_database_path():
         db_path = os.getenv("DB_PATH")
-        print(f"[DEBUG] os.name = {os.name}")
-        print(f"[DEBUG] DB_PATH env = {db_path}")
+        logger.debug(f"os.name = {os.name}")
+        logger.debug(f"DB_PATH env = {db_path}")
 
         if db_path:
             return db_path
