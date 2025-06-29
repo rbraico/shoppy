@@ -202,5 +202,12 @@
             });
         });
     </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/service-worker.js')
+          .then(reg => console.log('✅ Service Worker registrato:', reg))
+          .catch(err => console.error('❌ Registrazione fallita:', err));
+      }
+    </script>
 </body>
 </html>

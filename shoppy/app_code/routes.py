@@ -7,8 +7,15 @@ from flask import request, jsonify
 import json
 import requests
         
+from flask import send_from_directory
+import os
+
+
 main = Blueprint('main', __name__)
 
+@main.route('/service-worker.js')
+def service_worker():
+    return send_from_directory('static', 'service-worker.js', mimetype='application/javascript')
 
 
 # Funzione per calcolare il numero della decade corrente
