@@ -7,207 +7,355 @@
     <link rel="icon" href="{{ url_for('static', filename='images/Shoppy_icon_512.png') }}">
     <meta name="theme-color" content="#ffffff">
     <style>
-        body {
-            font-family: sans-serif;
-            padding: 1em;
-            background: #f9f9f9;
+    body {
+        font-family: sans-serif;
+        padding: 1em;
+        background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 480px;
+        margin: 20px 10px;
+        background: #fff;
+        padding: 10px;
+    }
+
+    .filter-box {
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.98em;
+        background: #fff;
+    }
+
+    th, td {
+        padding: 6px 4px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #1976d2;
+        color: #fff;
+        font-size: 1em;
+        border: 1px solid #fff;
+    }
+
+    td {
+        border: 1px solid #ddd;
+        font-size: 0.97em;
+        word-break: break-word;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    input[type="date"],
+    input[type="number"] {
+        padding: 2px 4px;
+        font-size: 0.97em;
+        box-sizing: border-box;
+    }
+
+    input[type="date"] {
+        width: 100%;
+    }
+
+    input[type="number"] {
+        max-width: 70px;
+        width: 70px;
+        text-align: right;
+    }
+
+    /* Header desktop */
+    .desktop-header {
+        background-color: #1976d2;
+        color: white;
+        padding: 14px 12px;
+        border-radius: 4px;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+
+    .desktop-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        min-height: 44px;
+    }
+
+    .desktop-header-top .logo {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-content {
+        text-align: center;
+    }
+
+    .header-title {
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+    }
+
+    .filter-box label {
+        margin-right: 4px;
+        font-weight: normal;
+    }
+
+    .filter-box select {
+        font-size: 0.95rem;
+    }
+
+    /* Header mobile nascosto su desktop */
+    .mobile-header {
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        /* Layout tabella verticale per mobile */
+        table, thead, tbody, th, td, tr {
+        display: block;
         }
 
-        .container {
-            max-width: 480px;
-            margin: 20px 10px;
-            background: #fff;
-            padding: 10px;
+        table tr:first-child {
+        display: none;
         }
 
-        .container h1 {
-            font-size: 1.2em;
-            text-align: left;
-            margin: 0 0 10px 0;
-        }
-
-        .filter-box {
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 0.98em;
-            background: #fff;
-        }
-
-        th, td {
-            padding: 6px 4px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #1976d2;
-            color: #fff;
-            font-size: 1em;
-            border: 1px solid #fff;
+        tr {
+        margin-bottom: 10px;
+        border-bottom: 2px solid #1976d2;
         }
 
         td {
-            border: 1px solid #ddd;
-            font-size: 0.97em;
-            word-break: break-word;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        min-height: 32px;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        td:before {
+        position: absolute;
+        left: 8px;
+        top: 6px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #1976d2;
         }
 
-        input[type="date"] {
-            padding: 2px 4px;
-            font-size: 0.97em;
-            width: 100%;
-            box-sizing: border-box;
+        td:nth-of-type(1):before { content: "Prodotto"; }
+        td:nth-of-type(2):before { content: "Quantità"; }
+        td:nth-of-type(3):before { content: "Prezzo"; }
+        td:nth-of-type(4):before { content: "Data Scadenza"; }
+
+        /* Intestazione mobile */
+        .mobile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 10px 12px;
+        background-color: #1976d2;
+        color: white;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
         }
 
-        input[type="number"] {
-            padding: 2px 4px;
-            font-size: 0.97em;
-            max-width: 70px;
-            width: 70px;
-            box-sizing: border-box;
-            text-align: right;
+        .mobile-header-top {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        min-height: 40px;
+        margin-bottom: 6px;
         }
 
-        @media (max-width: 600px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            thead tr {
-                display: none;
-            }
-
-            tr {
-                margin-bottom: 10px;
-                border-bottom: 2px solid #1976d2;
-            }
-
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-                min-height: 32px;
-            }
-
-            td:before {
-                position: absolute;
-                left: 8px;
-                top: 6px;
-                width: 45%;
-                white-space: nowrap;
-                font-weight: bold;
-                color: #1976d2;
-            }
-
-            td:nth-of-type(1):before { content: "Prodotto"; }
-            td:nth-of-type(2):before { content: "Quantità"; }
-            td:nth-of-type(3):before { content: "Prezzo"; }
-            td:nth-of-type(4):before { content: "Data Scadenza"; }
+        .mobile-header .logo {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
         }
+
+        .header-title {
+        font-size: 1rem;
+        line-height: 1.2;
+        max-width: 80%;
+        margin: 0 auto;
+        }
+
+        .filter-text {
+        font-size: 0.9rem;
+        color: white;
+        }
+
+        /* Nasconde header desktop su mobile */
+        .desktop-header {
+        display: none;
+        }
+    }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🛒 Lista della Spesa</h1>
+  <div class="container">
+
+    <!-- Header per desktop e tablet -->
+    <div class="desktop-header">
+    <div class="desktop-header-top">
+        <img src="/static/icons/Shoppy_icon-512.png" alt="Shoppy" class="logo">
+        <div class="header-content">
+        <div class="header-title">🛒 Lista della Spesa</div>
         <div class="filter-box">
             <label for="shopFilter">Filtra per negozio:</label>
             <select id="shopFilter" style="padding:4px;">
-                <option value="">Tutti</option>
-                {% set shop_set = [] %}
-                {% for item in items %}
-                    {% if item[3] not in shop_set %}
-                        <option value="{{ item[3] }}">{{ item[3] }}</option>
-                        {% set _ = shop_set.append(item[3]) %}
-                    {% endif %}
-                {% endfor %}
+            <option value="">Tutti</option>
+            {% set shop_set = [] %}
+            {% for item in items %}
+                {% if item[3] not in shop_set %}
+                    <option value="{{ item[3] }}">{{ item[3] }}</option>
+                    {% set _ = shop_set.append(item[3]) %}
+                {% endif %}
+            {% endfor %}
             </select>
         </div>
-
-        <table id="shoppingTable">
-            <tr>
-                <th>Prodotto</th>
-                <th>Quantità</th>
-                <th>Prezzo</th>
-                <th>Data Scadenza</th>
-                <th></th> <!-- Colonna per il pulsante -->
-            </tr>
-            {% for item in items %}
-            <tr data-shop="{{ item[3] }}">
-                <td>{{ item[0] }}</td>
-                <td>{{ item[1] }}</td>
-                <td>
-                    <input type="number" name="prezzo_{{ loop.index }}" value="{{ item[2] }}" step="0.01" min="0" max="999.99" style="max-width:70px; text-align:right;" inputmode="decimal" pattern="^\d{1,3}(\.\d{0,2})?$" />
-                </td>
-                <td>
-                    <input type="date" name="scadenza_{{ loop.index }}" />
-                </td>
-                <td>
-                    <button data-cart style="background:none; border:none; cursor:pointer; font-size:1.2em;" title="Aggiungi al carrello">
-                        🛒
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        </div>
+    </div>
     </div>
 
-    <script>
-        const shopFilter = document.getElementById('shopFilter');
-        shopFilter.addEventListener('change', function() {
-            const value = this.value;
-            const rows = document.querySelectorAll('#shoppingTable tr[data-shop]');
-            rows.forEach(row => {
-                if (!value || row.getAttribute('data-shop') === value) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
+    <!-- Header per mobile -->
+    <div class="mobile-header">
+      <div class="mobile-header-top">
+        <img src="/static/icons/Shoppy_icon-512.png" alt="Shoppy" class="logo">
+        <div class="header-title">🛒 Lista della Spesa</div>
+      </div>
+      <div class="filter-text">
+        <label for="shopFilterMobile">Filtra per negozio:</label>
+        <select id="shopFilterMobile" style="padding:4px;">
+          <option value="">Tutti</option>
+          {% set shop_set = [] %}
+          {% for item in items %}
+              {% if item[3] not in shop_set %}
+                  <option value="{{ item[3] }}">{{ item[3] }}</option>
+                  {% set _ = shop_set.append(item[3]) %}
+              {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
 
-        document.querySelectorAll('#shoppingTable button[data-cart]').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const row = btn.closest('tr');
-                const product_name = row.children[0].innerText;
-                const quantity = row.children[1].innerText;
-                const price = row.querySelector('input[type="number"]').value;
-                const expiry = row.querySelector('input[type="date"]').value;
-                const shop = row.getAttribute('data-shop');
-                const payload = {
-                    product_name,
-                    quantity,
-                    price,
-                    expiry,
-                    shop,
-                    timestamp: new Date().toISOString()
-                };
-                fetch('/add_to_queue', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).then(resp => resp.json())
-                  .then(data => {
-                      if (data.status === "ok") {
-                          row.style.display = "none";
-                      }
-                  });
-            });
-        });
-    </script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/static/service-worker.js')
-          .then(reg => console.log('✅ Service Worker registrato:', reg))
-          .catch(err => console.error('❌ Registrazione fallita:', err));
-      }
-    </script>
+    <!-- Tabella della lista della spesa -->
+    <table id="shoppingTable">
+      <tr>
+        <th>Prodotto</th>
+        <th>Quantità</th>
+        <th>Prezzo</th>
+        <th>Data Scadenza</th>
+        <th></th>
+      </tr>
+      {% for item in items %}
+      <tr data-shop="{{ item[3] }}">
+        <td>{{ item[0] }}</td>
+        <td>{{ item[1] }}</td>
+        <td>
+          <input type="number" name="prezzo_{{ loop.index }}" value="{{ item[2] }}" step="0.01" min="0" max="999.99"
+            style="max-width:70px; text-align:right;" inputmode="decimal" pattern="^\d{1,3}(\.\d{0,2})?$" />
+        </td>
+        <td>
+          <input type="date" name="scadenza_{{ loop.index }}" />
+        </td>
+        <td>
+          <button data-cart style="background:none; border:none; cursor:pointer; font-size:1.2em;" title="Aggiungi al carrello">
+            🛒
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- Script per filtro e carrello -->
+  <script>
+    const shopFilter = document.getElementById('shopFilter');
+    const shopFilterMobile = document.getElementById('shopFilterMobile');
+
+    function applyShopFilter(value) {
+      const rows = document.querySelectorAll('#shoppingTable tr[data-shop]');
+      rows.forEach(row => {
+        if (!value || row.getAttribute('data-shop') === value) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Sincronizza entrambi i menu
+    if (shopFilter) {
+      shopFilter.addEventListener('change', function () {
+        applyShopFilter(this.value);
+        if (shopFilterMobile) shopFilterMobile.value = this.value;
+      });
+    }
+
+    if (shopFilterMobile) {
+      shopFilterMobile.addEventListener('change', function () {
+        applyShopFilter(this.value);
+        if (shopFilter) shopFilter.value = this.value;
+      });
+    }
+
+    // Gestione aggiunta al carrello
+    document.querySelectorAll('#shoppingTable button[data-cart]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const row = btn.closest('tr');
+        const product_name = row.children[0].innerText;
+        const quantity = row.children[1].innerText;
+        const price = row.querySelector('input[type="number"]').value;
+        const expiry = row.querySelector('input[type="date"]').value;
+        const shop = row.getAttribute('data-shop');
+        const payload = {
+          product_name,
+          quantity,
+          price,
+          expiry,
+          shop,
+          timestamp: new Date().toISOString()
+        };
+        fetch('/add_to_queue', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(resp => resp.json())
+          .then(data => {
+            if (data.status === "ok") {
+              row.style.display = "none";
+            }
+          });
+      });
+    });
+  </script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/service-worker.js')
+        .then(reg => console.log('✅ Service Worker registrato:', reg))
+        .catch(err => console.error('❌ Registrazione fallita:', err));
+    }
+  </script>
 </body>
+
 </html>
