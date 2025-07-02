@@ -36,7 +36,7 @@ def shopping_list():
     cur = conn.cursor()
     decade = get_current_decade()
     cur.execute(
-         "SELECT product_name, quantity_to_buy, price, shop FROM shopping_list WHERE decade_number = ?",
+         "SELECT product_name, quantity_to_buy, price, shop FROM shopping_list WHERE within_budget=1 AND decade_number = ?",
          (decade,)
     )
     items = cur.fetchall()
