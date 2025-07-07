@@ -1,7 +1,7 @@
 # Questo file configuration.yaml serve per Home Assistant
 name: Shoppy
 description: "Visualizzatore mobile della lista della spesa di StockHouse"
-version: "2.0.6"
+version: "2.0.7"
 slug: shoppy
 url: "https://github.com/rbraico/shoppy"
 init: false

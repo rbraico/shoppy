@@ -29,9 +29,20 @@ def get_current_decade(today=None):
     else:
         return "D3"
 
+
+# Rotta principale che mostra la pagina iniziale
 @main.route('/shopping_list')
 def shopping_list():
-    """Render the shopping list page with items from the database."""
+    # 🔁 Chiedi a StockHouse di aggiornare la shopping_list
+    try:
+        stockhouse_url = Config.get_stockhouse_url()
+        response = requests.post(f"{stockhouse_url}/api/shopping_list/refresh")
+        data = response.json()
+        print(f"[DEBUG] Risposta da StockHouse: {data}")
+    except Exception as e:
+        print(f"[ERROR] Impossibile contattare StockHouse: {e}")
+
+    # ✅ Continua a caricare i dati dal DB condiviso
     conn = sqlite3.connect(Config.DATABASE_PATH)
     cur = conn.cursor()
     decade = get_current_decade()
@@ -41,12 +52,11 @@ def shopping_list():
     )
     items = cur.fetchall()
     conn.close()
-    print(f"Fetched items: {items}")
     return render_template('shopping_list.html', items=items)
 
 
 
-
+#I prodotti aggiunti al carrello vengono spediti a stockhouse
 @main.route('/add_to_queue', methods=['POST'])
 def add_to_queue():
     data = request.get_json()
